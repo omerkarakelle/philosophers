@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:39:22 by okarakel          #+#    #+#             */
-/*   Updated: 2023/02/12 19:53:24 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:27:40 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define STATE_EATING 1
 # define STATE_SLEEPING 2
 # define STATE_THINKING 3
+# define STATE_DEAD 4
 
 typedef long long	t_time;
 
@@ -34,6 +35,7 @@ typedef struct s_philo
 	int			eat_time;
 	t_time		last_eat;
 	pthread_t	*philo;
+	t_data		*data;
 }	t_philo;
 
 typedef struct s_data
