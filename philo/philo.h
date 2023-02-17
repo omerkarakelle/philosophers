@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:39:22 by okarakel          #+#    #+#             */
-/*   Updated: 2023/02/12 21:27:40 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/02/17 19:20:08 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,18 @@
 # define STATE_DEAD 4
 
 typedef long long	t_time;
+struct s_data;
 
 typedef struct s_philo
 {
-	int			id;
-	int			lh;
-	int			rh;
-	int			state;
-	int			eat_time;
-	t_time		last_eat;
-	pthread_t	*philo;
-	t_data		*data;
+	int				id;
+	int				lh;
+	int				rh;
+	int				state;
+	int				eat_time;
+	t_time			last_eat;
+	pthread_t		*philo;
+	struct s_data	*data;
 }	t_philo;
 
 typedef struct s_data
@@ -45,6 +46,7 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_eat_limit;
+	int				*using_forks;
 	t_time			init_time;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
@@ -55,5 +57,7 @@ int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		ft_error(char *str);
 void	*philo_loop(void *data);
+t_time	get_time_in_ms();
+t_time	get_time_in_us();
 
 #endif
