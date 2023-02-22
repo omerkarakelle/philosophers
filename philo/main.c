@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:41:07 by okarakel          #+#    #+#             */
-/*   Updated: 2023/02/17 19:27:20 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:30:53 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ t_time	get_time_in_ms()
 void	ft_init_philo(t_philo *philo, int id)
 {
 	philo->id = id + 1;
-	philo->lh = 0;
-	philo->rh = 0;
 	philo->state = STATE_THINKING;
 	philo->last_eat = get_time_in_ms();
 }
@@ -44,6 +42,20 @@ int	ft_create_philos(t_data *data)
 	i = -1;
 	while(++i < data->number_of_philos)
 	{
+		if (i % 2 == 1)
+			continue;
+		ft_init_philo(data->philos + i, i);
+		data->philos[i].philo = (pthread_t *)malloc(sizeof(pthread_t));
+		data->philos[i].data = data;
+		if (pthread_create(data->philos->philo + i, NULL, philo_loop, data->philos + i) != 0)
+			return (-1);
+		usleep(10);
+	}
+	i = -1;
+	while(++i < data->number_of_philos)
+	{
+		if (i % 2 == 0)
+			continue;
 		ft_init_philo(data->philos + i, i);
 		data->philos[i].philo = (pthread_t *)malloc(sizeof(pthread_t));
 		data->philos[i].data = data;
@@ -64,6 +76,8 @@ int	init_mutex(t_data *data)
 		if (pthread_mutex_init(&data->forks[i], NULL) == -1) 
 			return (-1);
 	}
+	if (pthread_mutex_init(&data->dead, NULL) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -88,5 +102,6 @@ int	main(int argc, char **argv)
 	while (++i < data.number_of_philos)
 		pthread_join(*data.philos[i].philo, NULL);
 	pthread_mutex_destroy(data.forks);
+	pthread_mutex_destroy(data.dead);
 	return (0);
 }

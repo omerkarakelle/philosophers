@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:39:22 by okarakel          #+#    #+#             */
-/*   Updated: 2023/02/17 19:20:08 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:31:24 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ struct s_data;
 typedef struct s_philo
 {
 	int				id;
-	int				lh;
-	int				rh;
 	int				state;
 	int				eat_time;
 	t_time			last_eat;
@@ -49,6 +47,7 @@ typedef struct s_data
 	int				*using_forks;
 	t_time			init_time;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	*dead;
 	t_philo			*philos;
 }	t_data;
 
@@ -59,5 +58,6 @@ int		ft_error(char *str);
 void	*philo_loop(void *data);
 t_time	get_time_in_ms();
 t_time	get_time_in_us();
+void	ft_deadcheck(t_philo *philo);
 
 #endif
