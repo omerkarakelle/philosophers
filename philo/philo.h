@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:39:22 by okarakel          #+#    #+#             */
-/*   Updated: 2023/02/22 17:31:24 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/02/26 19:43:43 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				min_eat_limit;
 	int				*using_forks;
+	int				deadnb;
 	t_time			init_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*dead;
@@ -59,5 +60,6 @@ void	*philo_loop(void *data);
 t_time	get_time_in_ms();
 t_time	get_time_in_us();
 void	ft_deadcheck(t_philo *philo);
+int		is_anyone_dead(t_data *data);
 
 #endif
