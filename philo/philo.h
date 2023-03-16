@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:39:22 by okarakel          #+#    #+#             */
-/*   Updated: 2023/02/26 19:43:43 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:11:48 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define STATE_SLEEPING 2
 # define STATE_THINKING 3
 # define STATE_DEAD 4
+# define STATE_FORK 5
 
 typedef long long	t_time;
 struct s_data;
@@ -41,6 +42,7 @@ typedef struct s_data
 {
 	int				number_of_philos;
 	int				time_to_die;
+	int				adam;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_eat_limit;
@@ -59,7 +61,8 @@ int		ft_error(char *str);
 void	*philo_loop(void *data);
 t_time	get_time_in_ms();
 t_time	get_time_in_us();
-void	ft_deadcheck(t_philo *philo);
+void	*ft_deadcheck(void *philo);
 int		is_anyone_dead(t_data *data);
+void	ft_printinfo(t_philo *philo);
 
 #endif

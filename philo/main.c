@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:41:07 by okarakel          #+#    #+#             */
-/*   Updated: 2023/02/26 19:32:20 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:01:33 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_init_philo(t_philo *philo, int id)
 	philo->id = id + 1;
 	philo->state = STATE_THINKING;
 	philo->last_eat = get_time_in_ms();
+	philo->eat_time = 0;
 }
 
 int	ft_create_philos(t_data *data)
@@ -49,7 +50,7 @@ int	ft_create_philos(t_data *data)
 		data->philos[i].data = data;
 		if (pthread_create(data->philos->philo + i, NULL, philo_loop, data->philos + i) != 0)
 			return (-1);
-		usleep(10);
+		usleep(1000);
 	}
 	i = -1;
 	while(++i < data->number_of_philos)
@@ -61,7 +62,7 @@ int	ft_create_philos(t_data *data)
 		data->philos[i].data = data;
 		if (pthread_create(data->philos->philo + i, NULL, philo_loop, data->philos + i) != 0)
 			return (-1);
-		usleep(10);
+		usleep(1000);
 	}
 	return (0);
 }
@@ -96,6 +97,7 @@ int	main(int argc, char **argv)
 	data.philos->philo = (pthread_t *)malloc(sizeof(pthread_t));
 	data.forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data.number_of_philos);
 	data.dead = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	data.adam = 0;
 	init_mutex(&data);
 	if (ft_create_philos(&data) == -1)
 		return (ft_error("Error: Something happened while creating threads."));
