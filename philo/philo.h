@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:39:22 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/16 20:11:48 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:09:49 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,16 @@ typedef struct s_data
 {
 	int				number_of_philos;
 	int				time_to_die;
-	int				adam;
+	int				philos_that_ate;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_eat_limit;
-	int				*using_forks;
-	int				deadnb;
+	int				*using_forks; //sil
+	int				deadnb; //sil
 	t_time			init_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*dead;
+	pthread_mutex_t	*print_mutex;
 	t_philo			*philos;
 }	t_data;
 

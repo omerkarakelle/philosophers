@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:15:08 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/23 17:18:06 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:23:41 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_printinfo(t_philo *philo)
 {
 	t_data *data;
 
+	pthread_mutex_lock(philo->data->print_mutex);
 	data = philo->data;
 	if (philo->state == STATE_SLEEPING)
 		printf("%lld\t%d is sleeping.\n", get_time_in_ms() - data->init_time, philo->id);
@@ -27,6 +28,7 @@ void	ft_printinfo(t_philo *philo)
 		printf("%lld\t%d died.\n", get_time_in_ms() - data->init_time, philo->id);
 	else if (philo->state == STATE_FORK)
 		printf("%lld\t%d has taken a fork.\n", get_time_in_ms() - data->init_time, philo->id);
+	pthread_mutex_unlock(philo->data->print_mutex);
 }
 
 int	ft_isdigit(int c)

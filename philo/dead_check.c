@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:21:00 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/16 18:48:17 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:29:15 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ void	*ft_deadcheck(void *philosophers)
 	{
 		if (get_time_in_ms() - philo->last_eat >= philo->data->time_to_die)
 		{
-			printf("%lld %d died.\n", get_time_in_ms() - philo->data->init_time, philo->id);
+			pthread_mutex_lock(philo->data->print_mutex);
+			printf("%lld\t%d died.\n", get_time_in_ms() - philo->data->init_time, philo->id);
 			exit(1);
 		}
+		usleep(10);
 	}
 }
 

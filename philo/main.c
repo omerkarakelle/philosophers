@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:41:07 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/16 20:01:33 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:22:30 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int	main(int argc, char **argv)
 	data.philos->philo = (pthread_t *)malloc(sizeof(pthread_t));
 	data.forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data.number_of_philos);
 	data.dead = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	data.adam = 0;
+	data.print_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	data.philos_that_ate = 0;
 	init_mutex(&data);
 	if (ft_create_philos(&data) == -1)
 		return (ft_error("Error: Something happened while creating threads."));
@@ -105,6 +106,7 @@ int	main(int argc, char **argv)
 	while (++i < data.number_of_philos)
 		pthread_join(*data.philos[i].philo, NULL);
 	pthread_mutex_destroy(data.forks);
+	pthread_mutex_destroy(data.print_mutex);
 	pthread_mutex_destroy(data.dead);
 	return (0);
 }

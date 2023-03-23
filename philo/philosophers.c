@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:28:17 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/23 17:46:03 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:26:07 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,17 @@ int	ft_eating(t_philo *philo)
 		pthread_mutex_lock(&data->forks[right]);
 		ft_printinfo(philo);
 		philo->state = STATE_EATING;
-		ft_printinfo(philo);
-		philo->last_eat = get_time_in_ms();
 		philo->eat_time++;
 		if (philo->eat_time == data->min_eat_limit)
-			data->adam++;
-		if (data->adam >= data->number_of_philos)
+			data->philos_that_ate++;
+		if (data->philos_that_ate >= data->number_of_philos)
+		{
+			pthread_mutex_lock(data->print_mutex);
+			printf("%lld\t%d is eating.\n", get_time_in_ms() - data->init_time, philo->id);
 			exit(1);
+		}
+		ft_printinfo(philo);
+		philo->last_eat = get_time_in_ms();
 		usleep(philo->data->time_to_eat * 1000);
 		pthread_mutex_unlock(&data->forks[left]);
 		pthread_mutex_unlock(&data->forks[right]);
