@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:28:17 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/16 20:17:49 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:46:03 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	*philo_loop(void *philoshopher)
 	
 	philo = (t_philo *)philoshopher;
 	if (pthread_create(&pid, NULL, &ft_deadcheck, philoshopher) != 0)
-			return (-1);
+			return (NULL);
 	while (1)
 	{
 		if (ft_eating(philo) == -1)

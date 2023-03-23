@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:15:08 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/16 20:14:41 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:18:06 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	ft_printinfo(t_philo *philo)
 
 	data = philo->data;
 	if (philo->state == STATE_SLEEPING)
-		printf("%lld %d is sleeping.\n", get_time_in_ms() - data->init_time, philo->id);
+		printf("%lld\t%d is sleeping.\n", get_time_in_ms() - data->init_time, philo->id);
 	else if (philo->state == STATE_THINKING)
-		printf("%lld %d is thinking.\n", get_time_in_ms() - data->init_time, philo->id);
+		printf("%lld\t%d is thinking.\n", get_time_in_ms() - data->init_time, philo->id);
 	else if (philo->state == STATE_EATING)
-		printf("%lld %d is eating.\n", get_time_in_ms() - data->init_time, philo->id);
+		printf("%lld\t%d is eating.\n", get_time_in_ms() - data->init_time, philo->id);
 	else if (philo->state == STATE_DEAD)
-		printf("%lld %d died.\n", get_time_in_ms() - data->init_time, philo->id);
+		printf("%lld\t%d died.\n", get_time_in_ms() - data->init_time, philo->id);
 	else if (philo->state == STATE_FORK)
-		printf("%lld %d has taken a fork.\n", get_time_in_ms() - data->init_time, philo->id);
+		printf("%lld\t%d has taken a fork.\n", get_time_in_ms() - data->init_time, philo->id);
 }
 
 int	ft_isdigit(int c)
