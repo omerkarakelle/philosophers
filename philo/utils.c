@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:15:08 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 18:47:17 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 19:05:34 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	printmessage(t_philo *philo, int state)
 		printf("%lld\t%d is eating.\n", get_time_in_ms() - philo->data->init_time,
 			philo->id);
 	else if (state == STATE_DEAD)
-		printf("%lld\t%d died.\n", get_time_in_ms()
+		printf("%lld\t%d died\n", get_time_in_ms()
 			- philo->data->init_time, philo->id);
 	else if (state == STATE_FORK)
 		printf("%lld\t%d has taken a fork.\n", get_time_in_ms()

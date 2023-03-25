@@ -1,6 +1,6 @@
 SRCS= philosophers.c checkargs.c main.c utils.c
 CC= gcc
-CFLAGS= -Wall -Werror -Wextra -fsanitize=thread -g
+CFLAGS= -Wall -Werror -Wextra
 NAME=philo
 LIB=philo.h
 RM= rm -rf

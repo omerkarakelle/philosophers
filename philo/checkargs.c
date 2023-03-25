@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:09:58 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 14:43:22 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 20:01:54 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	ft_check_args(int argc, char **argv, t_data *data)
 	else
 		data->min_eat_limit = ft_atoi(argv[5]);
 	if (data->number_of_philos < 0 || data->time_to_die < 0
-		|| data->time_to_sleep < 0 || (argc == 6 && data->min_eat_limit <= 0))
+		|| data->time_to_sleep < 0 || data->time_to_eat < 0
+		|| (argc == 6 && data->min_eat_limit <= 0))
 		return (ft_error("Error: Check the arguments.\n"));
 	return (0);
 }
