@@ -1,13 +1,16 @@
 SRCS= philosophers.c checkargs.c main.c utils.c
 CC= gcc
-CFLAGS= -Wall -Werror -Wextra
+CFLAGS= -Wall -Werror -Wextra -fsanitize=thread -g
 NAME=philo
+LIB=philo.h
+RM= rm -rf
 
 SRCS = checkargs.c \
 	dead_check.c \
 	main.c \
 	utils.c \
-	philosophers.c
+	philosophers.c \
+	init.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -16,14 +19,14 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) 
 
 clean:
-	rm $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	rm $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

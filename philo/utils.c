@@ -6,28 +6,49 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:15:08 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/23 18:23:41 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:06:13 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+int	ft_exit(t_data *data)
+{
+	free(data->using_forks);
+	free(data->philos->philo);
+	free(data->philos);
+	free(data->forks);
+	free(data->dead);
+	free(data->print_mutex);
+	free(data->last_eat_mutex);
+	pthread_mutex_destroy(data->forks);
+	pthread_mutex_destroy(data->print_mutex);
+	pthread_mutex_destroy(data->dead);
+	pthread_mutex_destroy(data->last_eat_mutex);
+	return (0);
+}
+
 void	ft_printinfo(t_philo *philo)
 {
-	t_data *data;
+	t_data	*data;
 
 	pthread_mutex_lock(philo->data->print_mutex);
 	data = philo->data;
 	if (philo->state == STATE_SLEEPING)
-		printf("%lld\t%d is sleeping.\n", get_time_in_ms() - data->init_time, philo->id);
+		printf("%lld\t%d is sleeping.\n", get_time_in_ms() - data->init_time,
+			philo->id);
 	else if (philo->state == STATE_THINKING)
-		printf("%lld\t%d is thinking.\n", get_time_in_ms() - data->init_time, philo->id);
+		printf("%lld\t%d is thinking.\n", get_time_in_ms() - data->init_time,
+			philo->id);
 	else if (philo->state == STATE_EATING)
-		printf("%lld\t%d is eating.\n", get_time_in_ms() - data->init_time, philo->id);
+		printf("%lld\t%d is eating.\n", get_time_in_ms() - data->init_time,
+			philo->id);
 	else if (philo->state == STATE_DEAD)
-		printf("%lld\t%d died.\n", get_time_in_ms() - data->init_time, philo->id);
+		printf("%lld\t%d died.\n", get_time_in_ms() - data->init_time,
+			philo->id);
 	else if (philo->state == STATE_FORK)
-		printf("%lld\t%d has taken a fork.\n", get_time_in_ms() - data->init_time, philo->id);
+		printf("%lld\t%d has taken a fork.\n", get_time_in_ms() - data->init_time,
+			philo->id);
 	pthread_mutex_unlock(philo->data->print_mutex);
 }
 

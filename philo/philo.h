@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:39:22 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/23 18:09:49 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:15:41 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define STATE_FORK 5
 
 typedef long long	t_time;
-struct s_data;
+struct				s_data;
 
 typedef struct s_philo
 {
@@ -50,8 +50,9 @@ typedef struct s_data
 	int				deadnb; //sil
 	t_time			init_time;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	*dead;
+	pthread_mutex_t	*dead; //sil
 	pthread_mutex_t	*print_mutex;
+	pthread_mutex_t	*last_eat_mutex;
 	t_philo			*philos;
 }	t_data;
 
@@ -60,10 +61,14 @@ int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		ft_error(char *str);
 void	*philo_loop(void *data);
-t_time	get_time_in_ms();
-t_time	get_time_in_us();
+t_time	get_time_in_ms(void);
+t_time	get_time_in_us(void);
 void	*ft_deadcheck(void *philo);
 int		is_anyone_dead(t_data *data);
 void	ft_printinfo(t_philo *philo);
+void	ft_init_philo(t_philo *philo, int id);
+void	ft_init_data(t_data *data);
+int		init_mutex(t_data *data);
+int		ft_exit(t_data *data);
 
 #endif
