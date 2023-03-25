@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:21:00 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 14:44:03 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:06:31 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,4 @@ void	*ft_deadcheck(void *philosophers)
 		pthread_mutex_unlock(philo->data->last_eat_mutex);
 		usleep(10);
 	}
-}
-
-int	is_anyone_dead(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	if (data->deadnb == 1)
-		i = 1;
-	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:39:22 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 15:15:41 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:07:19 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,8 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_eat_limit;
-	int				*using_forks; //sil
-	int				deadnb; //sil
 	t_time			init_time;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	*dead; //sil
 	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	*last_eat_mutex;
 	t_philo			*philos;
@@ -64,7 +61,6 @@ void	*philo_loop(void *data);
 t_time	get_time_in_ms(void);
 t_time	get_time_in_us(void);
 void	*ft_deadcheck(void *philo);
-int		is_anyone_dead(t_data *data);
 void	ft_printinfo(t_philo *philo);
 void	ft_init_philo(t_philo *philo, int id);
 void	ft_init_data(t_data *data);

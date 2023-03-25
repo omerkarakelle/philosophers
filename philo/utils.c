@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:15:08 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 15:06:13 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:07:27 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 int	ft_exit(t_data *data)
 {
-	free(data->using_forks);
 	free(data->philos->philo);
 	free(data->philos);
 	free(data->forks);
-	free(data->dead);
 	free(data->print_mutex);
 	free(data->last_eat_mutex);
 	pthread_mutex_destroy(data->forks);
 	pthread_mutex_destroy(data->print_mutex);
-	pthread_mutex_destroy(data->dead);
 	pthread_mutex_destroy(data->last_eat_mutex);
 	return (0);
 }

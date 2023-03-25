@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:28:17 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 15:21:06 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:17:52 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int	eating_routine(t_philo *philo, t_data *data, int left, int right)
 
 int	ft_thinking(t_philo *philo)
 {
-	if (is_anyone_dead(philo->data) == 1)
-		return (-1);
 	philo->state = STATE_THINKING;
 	ft_printinfo(philo);
 	return (0);
@@ -69,13 +67,7 @@ int	ft_eating(t_philo *philo)
 	else
 		left = philo->id - 2;
 	right = philo->id - 1;
-	while (1)
-	{
-		if (eating_routine(philo, data, left, right) == -1)
-			return (-1);
-		break ;
-	}
-	return (0);
+	return (eating_routine(philo, data, left, right) == -1);
 }
 
 void	*philo_loop(void *philoshopher)
