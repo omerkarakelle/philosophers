@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:41:07 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 15:06:49 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 18:25:22 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_create_philos(t_data *data, int c)
 		ft_init_philo(data->philos + i, i);
 		data->philos[i].philo = (pthread_t *)malloc(sizeof(pthread_t));
 		data->philos[i].data = data;
-		if (pthread_create(data->philos->philo + i, NULL, philo_loop,
+		if (pthread_create(data->philos[i].philo, NULL, philo_loop,
 				data->philos + i) != 0)
 			return (-1);
 		usleep(1000);

@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 14:46:47 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 16:07:14 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:21:15 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_init_data(t_data *data)
 	data->print_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	data->last_eat_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	data->philos_that_ate = 0;
+	data->is_game_over = 0;
 }
 
 int	init_mutex(t_data *data)

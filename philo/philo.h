@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 20:39:22 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 16:07:19 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:52:37 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_eat_limit;
+	int				is_game_over;
 	t_time			init_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*print_mutex;
@@ -61,7 +62,7 @@ void	*philo_loop(void *data);
 t_time	get_time_in_ms(void);
 t_time	get_time_in_us(void);
 void	*ft_deadcheck(void *philo);
-void	ft_printinfo(t_philo *philo);
+int		ft_printinfo(t_philo *philo, int state);
 void	ft_init_philo(t_philo *philo, int id);
 void	ft_init_data(t_data *data);
 int		init_mutex(t_data *data);

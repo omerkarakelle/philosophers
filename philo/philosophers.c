@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:28:17 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 16:17:52 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/25 18:43:05 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,39 @@
 
 int	eating_routine(t_philo *philo, t_data *data, int left, int right)
 {
+	int	a;
+
 	pthread_mutex_lock(&data->forks[left]);
-	philo->state = STATE_FORK;
-	ft_printinfo(philo);
-	pthread_mutex_lock(&data->forks[right]);
-	ft_printinfo(philo);
-	philo->state = STATE_EATING;
-	philo->eat_time++;
-	if (philo->eat_time == data->min_eat_limit)
-		data->philos_that_ate++;
-	if (data->philos_that_ate >= data->number_of_philos)
+	a = ft_printinfo(philo, STATE_FORK);
+	if (left == right)
 	{
-		pthread_mutex_lock(data->print_mutex);
-		printf("%lld\t%d is eating.\n", get_time_in_ms() - data->init_time,
-			philo->id);
-		exit(1);
+		usleep(data->time_to_die * 1000);
+		return (-1);
 	}
-	ft_printinfo(philo);
+	pthread_mutex_lock(&data->forks[right]);
+	a = ft_printinfo(philo, STATE_FORK);
+	a = ft_printinfo(philo, STATE_EATING);
 	pthread_mutex_lock(data->last_eat_mutex);
 	philo->last_eat = get_time_in_ms();
 	pthread_mutex_unlock(data->last_eat_mutex);
 	usleep(philo->data->time_to_eat * 1000);
 	pthread_mutex_unlock(&data->forks[left]);
 	pthread_mutex_unlock(&data->forks[right]);
-	return (0);
+	return (a);
 }
 
 int	ft_thinking(t_philo *philo)
 {
-	philo->state = STATE_THINKING;
-	ft_printinfo(philo);
-	return (0);
+	return (ft_printinfo(philo, STATE_THINKING));
 }
 
 int	ft_sleeping(t_philo *philo)
 {
-	philo->state = STATE_SLEEPING;
-	ft_printinfo(philo);
+	int	a;
+
+	a = ft_printinfo(philo, STATE_SLEEPING);
 	usleep(philo->data->time_to_sleep * 1000);
-	return (0);
+	return (a);
 }
 
 int	ft_eating(t_philo *philo)
@@ -67,7 +61,7 @@ int	ft_eating(t_philo *philo)
 	else
 		left = philo->id - 2;
 	right = philo->id - 1;
-	return (eating_routine(philo, data, left, right) == -1);
+	return (eating_routine(philo, data, left, right));
 }
 
 void	*philo_loop(void *philoshopher)
@@ -88,5 +82,6 @@ void	*philo_loop(void *philoshopher)
 			break ;
 	}
 	pthread_join(pid, NULL);
+	sleep(1);
 	return (NULL);
 }
