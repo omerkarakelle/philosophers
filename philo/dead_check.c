@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:21:00 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 20:38:11 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:46:12 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_deadcheck(void *philosophers)
 		pthread_mutex_unlock(philo->data->last_eat_mutex);
 		if (a == -1)
 			return (NULL);
-		usleep(philo->data->number_of_philos * 10);
+		usleep(philo->data->number_of_philos);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:15:08 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 19:05:34 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:28:13 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_printinfo(t_philo *philo, int state)
 		return (-1);
 	}
 	printmessage(philo, state);
-	if (data->philos_that_ate >= philo->data->number_of_philos
+	if (data->philos_that_ate >= data->number_of_philos
 		|| state == STATE_DEAD)
 		philo->data->is_game_over = 1;
 	pthread_mutex_unlock(philo->data->print_mutex);

@@ -6,7 +6,7 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:28:17 by okarakel          #+#    #+#             */
-/*   Updated: 2023/03/25 20:27:52 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:32:29 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ void	*philo_loop(void *philoshopher)
 			break ;
 	}
 	pthread_join(pid, NULL);
-	sleep(1);
+	usleep(10000);
 	return (NULL);
 }
