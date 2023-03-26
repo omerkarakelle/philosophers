@@ -6,11 +6,72 @@
 /*   By: okarakel <omerlutfu.k34@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:15:08 by okarakel          #+#    #+#             */
-/*   Updated: 2023/02/12 18:25:29 by okarakel         ###   ########.fr       */
+/*   Updated: 2023/03/26 16:27:23 by okarakel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	ft_exit(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->number_of_philos)
+		free(data->philos[i].philo);
+	free(data->philos);
+	free(data->forks);
+	free(data->print_mutex);
+	free(data->last_eat_mutex);
+	i = -1;
+	while (++i < data->number_of_philos)
+		pthread_mutex_destroy(data->forks + i);
+	pthread_mutex_destroy(data->print_mutex);
+	pthread_mutex_destroy(data->last_eat_mutex);
+	return (0);
+}
+
+void	printmessage(t_philo *philo, int state)
+{
+	if (state == STATE_SLEEPING)
+		printf("%lld\t%d is sleeping.\n", get_time_in_ms()
+			- philo->data->init_time, philo->id);
+	else if (state == STATE_THINKING)
+		printf("%lld\t%d is thinking.\n", get_time_in_ms()
+			- philo->data->init_time, philo->id);
+	else if (state == STATE_EATING)
+		printf("%lld\t%d is eating.\n", get_time_in_ms() - philo->data->init_time,
+			philo->id);
+	else if (state == STATE_DEAD)
+		printf("%lld\t%d died\n", get_time_in_ms()
+			- philo->data->init_time, philo->id);
+	else if (state == STATE_FORK)
+		printf("%lld\t%d has taken a fork.\n", get_time_in_ms()
+			- philo->data->init_time, philo->id);
+}
+
+int	ft_printinfo(t_philo *philo, int state)
+{
+	t_data	*data;
+
+	data = philo->data;
+	pthread_mutex_lock(philo->data->print_mutex);
+	if (state == STATE_EATING)
+		philo->eat_time++;
+	if (philo->eat_time == data->min_eat_limit && state == STATE_EATING)
+		data->philos_that_ate++;
+	if (philo->data->is_game_over == 1)
+	{
+		pthread_mutex_unlock(philo->data->print_mutex);
+		return (-1);
+	}
+	printmessage(philo, state);
+	if (data->philos_that_ate >= data->number_of_philos
+		|| state == STATE_DEAD)
+		philo->data->is_game_over = 1;
+	pthread_mutex_unlock(philo->data->print_mutex);
+	return (0);
+}
 
 int	ft_isdigit(int c)
 {
